@@ -1,4 +1,4 @@
-name: Publish Container Image
+name: Arbitrary action on tag creation
 on:  
   create:
     tags:
