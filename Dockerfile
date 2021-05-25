@@ -1,0 +1,5 @@
+arg BASE_IMG=scratch
+FROM $BASE_IMG
+
+COPY data/ data
+COPY LICENSE LICENSE
