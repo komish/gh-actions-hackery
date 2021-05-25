@@ -1,0 +1,28 @@
+name: Publish Container Image
+on:  
+  release: 
+    types: created
+  workflow_dispatch:
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      
+      - name: Build and tag container image.
+        uses: redhat-actions/buildah-build@v2
+        with:
+          image: my-demo-image
+          tags: ${{ github.tag }}
+          dockerfiles: ./Dockerfile
+          
+      - name: Publish container image to registry
+        uses: redhat-actions/push-to-registry@v2
+        with:
+          image: my-demo-image
+          tags: ${{ github.tag }}
+          registry: quay.io
+          username: komish
+          password: ${{ secrets.CONTAINER_REGISTRY_PUSH_TOKEN }}
+          
+          
