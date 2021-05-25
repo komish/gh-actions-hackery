@@ -1,4 +1,4 @@
-name: Publish Container Image
+name: Publish Container Image to Quay
 on:  
   push:
     tags:
@@ -6,6 +6,7 @@ on:
   workflow_dispatch:
 jobs:
   build:
+    if: github.event.base_ref == 'refs/heads/main'
     env:
       REGISTRY: quay.io
       NAMESPACE: komish
