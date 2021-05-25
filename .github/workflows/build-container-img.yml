@@ -1,0 +1,34 @@
+name: Publish Container Image
+on:  
+  release: 
+    types: created
+  workflow_dispatch:
+jobs:
+  build:
+    env:
+      REGISTRY: quay.io
+      NAMESPACE: komish
+      IMAGE: gh-actions-hackery
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Get tag reference
+        run: |
+          echo RELEASE_TAG=$(echo $GITHUB_REF | cut -d '/' -f 3) >> $GITHUB_ENV
+          
+      - name: Build and tag container image.
+        uses: redhat-actions/buildah-build@v2
+        with:
+          image: ${{ env.REGISTRY }}/${{ env.NAMESPACE }}/${{ env.IMAGE }}
+          tags: ${{ env.RELEASE_TAG }}
+          dockerfiles: ./Dockerfile
+
+      - name: Publish container image to registry
+        uses: redhat-actions/push-to-registry@v2
+        with:
+          image: ${{ env.NAMESPACE }}/${{ env.IMAGE }}
+          tags: ${{ env.RELEASE_TAG }}
+          registry: ${{ env.REGISTRY }}
+          username: ${{ secrets.CONTAINER_REGISTRY_PUSH_USERNAME }}
+          password: ${{ secrets.CONTAINER_REGISTRY_PUSH_TOKEN }}
