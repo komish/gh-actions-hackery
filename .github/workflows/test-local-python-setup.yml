@@ -1,0 +1,12 @@
+name: test local python action
+on: 
+  workflow_dispatch:
+
+jobs:
+  one:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: python --version
+      - uses: ./github/actions/setup-python
+      - run: python --version
