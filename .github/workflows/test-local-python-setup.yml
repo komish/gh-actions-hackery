@@ -8,5 +8,5 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - run: python --version
-      - uses: ./github/actions/setup-python
+      - uses: ./.github/actions/setup-python
       - run: python --version
