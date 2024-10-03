@@ -1,0 +1,31 @@
+name: Multi
+on:
+  workflow_dispatch: {}
+  push: {}
+
+jobs:
+  build-release:
+    name: Build and push tag images
+    strategy:
+      matrix:
+        architecture: [amd64,ppc64le,arm64,s390x]
+        platform: [linux]
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Set up QEMU
+      uses: docker/setup-qemu-action@v3
+
+    - name: Build Image 
+      id: build-image
+      uses: redhat-actions/buildah-build@v2
+      with:
+        image: "test-image"
+        tags: ${{ matrix.architecture}}
+        archs: ${{ matrix.architecture }}
+        # build-args: |
+        #   release_tag=${{env.RELEASE_TAG }}
+        #   ARCH=${{ matrix.architecture }}
+        dockerfiles: |
+          ./cryptography.Dockerfile
