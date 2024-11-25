@@ -18,6 +18,8 @@ jobs:
     steps:
     - run: echo "::warning::two"
   three:
+    if: |
+      !cancelled
     needs: [one, two]
     runs-on: ubuntu-latest
     steps:
