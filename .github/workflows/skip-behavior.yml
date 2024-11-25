@@ -1,0 +1,22 @@
+name: Skip Behaviors
+
+on:
+  workflow_dispatch: {}
+
+jobs:
+  one:
+    runs-on: ubuntu-latest
+    steps:
+    - run: echo ${{ github.job.id }} ${{ job.container.id }}
+  two:
+    runs-on: ubuntu-latest
+    steps:
+    - run: echo ${{ github.job.id }} ${{ job.container.id }}
+  three:
+    runs-on: ubuntu-latest
+    steps:
+    - run: echo ${{ github.job.id }} ${{ job.container.id }}
+  four:
+    runs-on: ubuntu-latest
+    steps:
+    - run: echo ${{ github.job.id }} ${{ job.container.id }}
