@@ -23,17 +23,13 @@ jobs:
         echo "::warning::two"
   three:
     needs: [one, two]
-    if: |
-      !cancelled() && !failure()
+    if: !cancelled() && !failure()
     runs-on: ubuntu-latest
     steps:
     - run: echo "::warning::three"
   four:
     needs: [three]
-    if: |
-      !cancelled() &&
-      !failure() &&
-      needs.three.result == 'success'
+    if: cancelled() && failure() && needs.three.result == 'success'
     runs-on: ubuntu-latest
     steps:
     - run: echo "::warning::four"
