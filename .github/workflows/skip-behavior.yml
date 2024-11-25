@@ -10,19 +10,19 @@ jobs:
   one:
     runs-on: ubuntu-latest
     steps:
-    - run: echo one
+    - run: echo "::warning::one"
   two:
     if: env.SKIP != 'true'
     runs-on: ubuntu-latest
     steps:
-    - run: echo two
+    - run: echo "::warning::two"
   three:
     needs: [two]
     runs-on: ubuntu-latest
     steps:
-    - run: echo three
+    - run: echo "::warning::three"
   four:
     needs: [three]
     runs-on: ubuntu-latest
     steps:
-    - run: echo four
+    - run: echo "::warning::four"
