@@ -31,7 +31,9 @@ jobs:
   four:
     needs: [three]
     if: |
-      !cancelled() && !failure()
+      !cancelled() &&
+      !failure() &&
+      needs.three.result == 'success'
     runs-on: ubuntu-latest
     steps:
     - run: echo "::warning::four"
