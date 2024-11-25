@@ -18,8 +18,8 @@ jobs:
       SKIP_THIS: 'true'
     steps:
     - run: |
-      [ "${{ env.SKIP_THIS }}" == "true" ] && exit 0
-      echo "::warning::two"
+        [ "${{ env.SKIP_THIS }}" == "true" ] && exit 0
+        echo "::warning::two"
   three:
     needs: [one, two]
     runs-on: ubuntu-latest
