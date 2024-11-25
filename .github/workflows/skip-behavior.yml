@@ -11,7 +11,7 @@ jobs:
   one:
     runs-on: ubuntu-latest
     steps:
-    - run: echo "::warning::one"
+    - run: echo "::warning::one ${{ vars.food || 'fools!'  }}" 
   two:
     runs-on: ubuntu-latest
     if: false
@@ -23,7 +23,8 @@ jobs:
         echo "::warning::two"
   three:
     needs: [one, two]
-    if: !cancelled() && !failure()
+    if: |
+      !cancelled() && !failure()
     runs-on: ubuntu-latest
     steps:
     - run: echo "::warning::three"
@@ -38,7 +39,7 @@ jobs:
   #   runs-on: ubuntu-latest
   #   steps:
   #   - run: echo "::warning::one"
-  # two:
+  # two:`
   #   if: |
   #     'true' != 'true'
   #   runs-on: ubuntu-latest
