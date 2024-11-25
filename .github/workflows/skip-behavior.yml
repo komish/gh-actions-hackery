@@ -13,7 +13,7 @@ jobs:
     - run: echo "::warning::one"
   two:
     if: |
-      env.skip != 'true'
+      'true' != 'true'
     runs-on: ubuntu-latest
     steps:
     - run: echo "::warning::two"
