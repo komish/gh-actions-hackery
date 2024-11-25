@@ -24,7 +24,7 @@ jobs:
   three:
     needs: [one, two]
     if: |
-      !cancelled() && !failure()
+      !cancelled() && !failure() && false
     runs-on: ubuntu-latest
     steps:
     - run: echo "::warning::three"
