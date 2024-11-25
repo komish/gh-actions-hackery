@@ -26,8 +26,6 @@ jobs:
     steps:
     - run: echo "::warning::three"
   four:
-    if: |
-      !cancelled()
     needs: [three]
     runs-on: ubuntu-latest
     steps:
