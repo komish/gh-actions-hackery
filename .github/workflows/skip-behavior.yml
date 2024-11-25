@@ -3,20 +3,26 @@ name: Skip Behaviors
 on:
   workflow_dispatch: {}
 
+env:
+  SKIP: 'true'
+
 jobs:
   one:
     runs-on: ubuntu-latest
     steps:
-    - run: echo ${{ github.job.id }} ${{ job.container.id }}
+    - run: echo one
   two:
+    if: env.SKIP != 'true'
     runs-on: ubuntu-latest
     steps:
-    - run: echo ${{ github.job.id }} ${{ job.container.id }}
+    - run: echo two
   three:
+    needs: [two]
     runs-on: ubuntu-latest
     steps:
-    - run: echo ${{ github.job.id }} ${{ job.container.id }}
+    - run: echo three
   four:
+    needs: [three]
     runs-on: ubuntu-latest
     steps:
-    - run: echo ${{ github.job.id }} ${{ job.container.id }}
+    - run: echo four
