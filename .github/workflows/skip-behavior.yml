@@ -14,8 +14,7 @@ jobs:
     - run: echo "::warning::one"
   two:
     runs-on: ubuntu-latest
-    if: |
-      true()
+    if: true
     env:
       SKIP_THIS: 'true'
     steps:
