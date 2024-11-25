@@ -19,7 +19,7 @@ jobs:
     - run: echo "::warning::two"
   three:
     if: |
-      !cancelled
+      !cancelled()
     needs: [one, two]
     runs-on: ubuntu-latest
     steps:
