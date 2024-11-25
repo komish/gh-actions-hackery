@@ -4,7 +4,7 @@ on:
   workflow_dispatch: {}
 
 env:
-  SKIP: 'true'
+  skip: 'true'
 
 jobs:
   one:
@@ -12,12 +12,13 @@ jobs:
     steps:
     - run: echo "::warning::one"
   two:
-    if: env.SKIP != 'true'
+    if: |
+      env.skip != 'true'
     runs-on: ubuntu-latest
     steps:
     - run: echo "::warning::two"
   three:
-    needs: [two]
+    needs: [one, two]
     runs-on: ubuntu-latest
     steps:
     - run: echo "::warning::three"
