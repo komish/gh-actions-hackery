@@ -11,51 +11,24 @@ jobs:
   one:
     runs-on: ubuntu-latest
     steps:
-    - run: echo "::warning::one ${{ vars.food || 'fools!'  }}" 
+    - run: echo "::warning::one"
   two:
-    runs-on: ubuntu-latest
-    if: false
-    env:
-      SKIP_THIS: 'true'
-    steps:
-    - run: |
-        [ "${{ env.SKIP_THIS }}" == "true" ] && exit 0
-        echo "::warning::two"
-  three:
-    needs: [one, two]
     if: |
-      !cancelled() && !failure()
+      'true' != 'true'
+    runs-on: ubuntu-latest
+    steps:
+    - run: echo "::warning::two"
+  three:
+    if: |
+      !cancelled()
+    needs: [one, two]
     runs-on: ubuntu-latest
     steps:
     - run: echo "::warning::three"
   four:
+    # if: |
+    #   !cancelled()
     needs: [three]
-    if: cancelled() && failure() && needs.three.result == 'success'
     runs-on: ubuntu-latest
     steps:
     - run: echo "::warning::four"
-
-  # one:
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #   - run: echo "::warning::one"
-  # two:`
-  #   if: |
-  #     'true' != 'true'
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #   - run: echo "::warning::two"
-  # three:
-  #   if: |
-  #     !cancelled()
-  #   needs: [one, two]
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #   - run: echo "::warning::three"
-  # four:
-  #   if: |
-  #     !cancelled()
-  #   needs: [three]
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #   - run: echo "::warning::four"
