@@ -1,0 +1,17 @@
+name: Test Env Vars
+on:
+  workflow_dispatch: {}
+
+jobs:
+  build: 
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+    - id: do-run
+      env: 
+        ONE: 'One; $(cat /etc/os-release)'
+      run: |
+        echo "Meep ==>" "${{ env.ONE }}"
+        echo "Neep ==>" "${ONE}"
+        echo "Teep ==>" $(yq <<< "${ONE}")
+        
