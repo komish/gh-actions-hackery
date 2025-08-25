@@ -1,7 +1,7 @@
 name: Multi
 on:
   workflow_dispatch: {}
-  push: {}
+  # push: {}
 
 jobs:
   build-release:
