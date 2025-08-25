@@ -8,9 +8,9 @@ jobs:
     name: Build and push tag images
     strategy:
       matrix:
-        index: [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20]
+        index: [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39]
       fail-fast: true
-      max-parallel: 4
+      max-parallel: 10
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v4
@@ -20,6 +20,7 @@ jobs:
         JOB_IDX: ${{ matrix.index }}
         EVENT_OBJ: ${{ toJSON(github.event) }}
       run: |
-        echo "Hello from matrix job ${JOB_IDX}"
+        test -z "${GITHUB_REF}" && exit 1
+        echo "Hello from matrix job ${JOB_IDX} with ref ${GITHUB_REF}"
         jq <<< "${EVENT_OBJ}"
         sleep 4
