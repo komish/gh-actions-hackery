@@ -18,7 +18,7 @@ jobs:
     - name: Just echo things and sleep
       env:
         JOB_IDX: ${{ matrix.index }}
-        EVENT_OBJ: ${{ github.event }}
+        EVENT_OBJ: ${{ toJSON(github.event) }}
       run: 
         echo "Hello from matrix job "${JOB_IDX}!"
         jq <<< "${EVENT_OBJ}"
