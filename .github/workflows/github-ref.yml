@@ -1,0 +1,23 @@
+name: Test GitHub Ref
+on:
+  pull_request_target:
+    branches: [main]
+
+env:
+  TOP_LEVEL_RESOLVED_GITHUB_REF: ${{ github.ref || format('refs/heads/${0}', (github.event.pull_request.base.ref || '-'))  }}
+
+jobs:
+  run-all-tests:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Show github ref
+        env:
+          CONTEXT_GITHUB_REF: ${{ github.ref }}
+          RESOLVED_GITHUB_REF: ${{ github.ref || format('refs/heads/${0}', (github.event.pull_request.base.ref || '-'))  }}
+        run: |
+            echo  | column -t <<EOF
+            ENV_VAR "${GITHUB_REF}"
+            CONTEXT "${CONTEXT_GITHUB_REF}"
+            RESOLVED_GITHUB_REF "${RESOLVED_GITHUB_REF}"
+            TOP_LEVEL_RESOLVED_REF "${TOP_LEVEL_RESOLVED_GITHUB_REF}"
+            EOF
