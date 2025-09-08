@@ -17,6 +17,7 @@ jobs:
         env:
           CONTEXT_GITHUB_REF: ${{ github.ref }}
           RESOLVED_GITHUB_REF: ${{ github.ref || format('refs/heads/${0}', (github.event.pull_request.base.ref || '-'))  }}
+          GITHUB_REF: "STEPLEVEL"
         run: |
             echo  | column -t <<EOF
             ENV_VAR "${GITHUB_REF}"
