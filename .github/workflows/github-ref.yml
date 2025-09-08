@@ -5,6 +5,7 @@ on:
 
 env:
   TOP_LEVEL_RESOLVED_GITHUB_REF: ${{ github.ref || format('refs/heads/${0}', (github.event.pull_request.base.ref || '-'))  }}
+  GITHUB_REF: "FOO"
 
 jobs:
   run-all-tests:
