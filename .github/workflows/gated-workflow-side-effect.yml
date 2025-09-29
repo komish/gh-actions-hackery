@@ -2,7 +2,7 @@ name: Gated Side Effect
 on:
   workflow_run:
     workflows:
-      - gated-workflow
+      - Gates Workflows
     types:
       - completed
 jobs:
