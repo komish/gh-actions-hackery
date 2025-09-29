@@ -1,4 +1,4 @@
-name: Gated Run Tests
+name: Gated Side Effect
 on:
   workflow_run:
     workflows:

@@ -1,4 +1,4 @@
-name: Gated Workflow
+name: Gates Workflows
 on:
   pull_request:
     branches: [main]
