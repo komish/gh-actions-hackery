@@ -14,8 +14,7 @@ jobs:
       - name: show event payload
         env:
           EVENT_PAYLOAD: ${{ github.event }}
-        run:
-          jq <<<"${EVENT_PAYLOAD}"
+        run: jq <<<"${EVENT_PAYLOAD}"
 
       - name: Run all tests.
         run: ./scripts/run-tests.sh
