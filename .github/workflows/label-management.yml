@@ -18,4 +18,5 @@ jobs:
       - run: gh pr edit --remove-label "${TESTING_LABEL}" "${PR_NUM}"
         env:
             PR_NUM: ${{ github.event.pull_request.number }}
+            GH_TOKEN: ${{ github.token }}
 
