@@ -11,7 +11,8 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-      - env:
+      - name: show event payload
+        env:
           EVENT_PAYLOAD: ${{ github.event }}
         run:
           jq <<<"${EVENT_PAYLOAD}"
