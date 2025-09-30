@@ -13,7 +13,7 @@ jobs:
 
       - name: show event payload
         env:
-          EVENT_PAYLOAD: ${{ github.event }}
+          EVENT_PAYLOAD: ${{ toJSON(github.event) }}
         run: jq <<<"${EVENT_PAYLOAD}"
 
       - name: Run all tests.
