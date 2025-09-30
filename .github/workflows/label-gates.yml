@@ -1,0 +1,21 @@
+name: Label Gates
+on:
+  pull_request:
+    branches: [main]
+    types:
+      - labeled
+      
+jobs:
+  run-all-tests:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - env:
+          EVENT_PAYLOAD: ${{ github.event }}
+        run:
+          jq <<<"${EVENT_PAYLOAD}"
+
+      - name: Run all tests.
+        run: ./scripts/run-tests.sh
+
