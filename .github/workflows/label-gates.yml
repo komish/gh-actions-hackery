@@ -11,6 +11,8 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
+      - run: ls -lah /usr/local/bin/oc
+
       - name: show event payload
         env:
           EVENT_PAYLOAD: ${{ toJSON(github.event) }}
