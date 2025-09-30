@@ -15,7 +15,7 @@ jobs:
   clear-labels:
     runs-on: ubuntu-latest
     steps:
-      - run: gh pr edit --remove-label "${TESTING_LABEL}" ${PR_NUM}"
+      - run: gh pr edit --remove-label "${TESTING_LABEL}" "${PR_NUM}"
         env:
             PR_NUM: ${{ github.event.pull_request.number }}
 
