@@ -39,9 +39,14 @@ jobs:
         run: |
           echo "FOO: ${IS_FOO}"
           echo "BAR: ${IS_BAR}"
-      - name: conditional-step
+      - name: non-functioning-conditional-step
         if: |
           steps.set-true.outputs.is-foo
           && steps.set-true.outputs.is-bar
+        run: echo "should not run"
+      - name: functioning-conditional-step
+        if: |
+          steps.set-true.outputs.is-foo == 'true'
+          && steps.set-true.outputs.is-bar == 'true'
         run: echo "should not run"
 
