@@ -24,4 +24,24 @@ jobs:
           echo "UNSET_VALUE => ${UNSET_VALUE}"
           echo "NO_TERNARY_SET_VALUE => ${NO_TERNARY_SET}"
           echo "NO_TERNARY_UNSET_VALUE => ${NO_TERNARY_UNSET}"
+      - name: set-true
+        id: set-true
+        uses: actions/github-script@latest
+        with:
+          script: |
+            let foo = 'foo'
+            core.setOutput('is-foo', foo == 'foo')
+            core.setOutput('is-bar', foo == 'bar')
+      - name: check set-true
+        env:
+          IS_FOO: ${{ steps.set-true.outputs.is-foo && steps.set-true.outputs.is-foo || 'nope' }}
+          IS_BAR: ${{ steps.set-true.outputs.is-bar && steps.set-true.outputs.is-bar || 'nope' }}
+        run: |
+          echo "FOO: ${IS_FOO}"
+          echo "BAR: ${IS_BAR}"
+      - name: conditional-step
+        if: |
+          steps.set-true.outputs.is-foo
+          && steps.set-true.outputs.is-bar
+        run: echo "should not run"
 
