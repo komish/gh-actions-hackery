@@ -18,7 +18,7 @@ jobs:
           SET_VALUE: ${{ env.SOME_VALUE && env.SOME_VALUE || 'unset' }}
           UNSET_VALUE:  ${{ env.EMPTY_VALUE && env.EMPTY_VALUE || 'unset' }}
           NO_TERNARY_SET: ${{ env.SOME_VALUE || 'unset' }}
-          NO_TERNARY_UNSET: ${{ env.SOME_VALUE || 'unset' }}
+          NO_TERNARY_UNSET: ${{ env.EMPTY_VALUE || 'unset' }}
         run: |
           echo "SET_VALUE => ${SET_VALUE}"
           echo "UNSET_VALUE => ${UNSET_VALUE}"
