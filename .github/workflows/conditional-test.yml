@@ -1,0 +1,24 @@
+name: Conditional Testing
+
+on:
+    workflow_dispatch: {}
+
+jobs:
+    test-condition:
+        runs-on: ubuntu-slim
+        steps:
+          - id: first-step
+            run: |
+                echo "val=foo" | tee -a "${GITHUB_OUTPUT}"
+          - id: second-step
+            env:
+                FIRST_STEP: ${{ steps.first-step.outputs.val }}
+            run: |
+                echo "First step val was: ${FIRST_STEP}"
+          - id: third-step
+            if: ${{ 'this' == 'that' &&
+                contains(['foo', 'bar'], steps.first-step.outputs.val)
+                }}
+            run: echo "third step ran!"
+
+
