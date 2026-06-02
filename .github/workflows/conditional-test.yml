@@ -16,7 +16,7 @@ jobs:
             run: |
                 echo "First step val was: ${FIRST_STEP}"
           - id: third-step
-            if: ${{ 'this' == 'that' &&
+            if: ${{ 'this' == 'this' &&
                 contains(fromJSON('["foo", "bar"]'), steps.first-step.outputs.val)
                 }}
             run: echo "third step ran!"
